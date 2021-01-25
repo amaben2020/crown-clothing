@@ -1,14 +1,16 @@
 import React from "react";
-
+import CollectionItem from "../collection-item/CollectionItem";
+import "./collection-preview.styles.css";
 const CollectionPreview = ({ title, items }) => {
-	console.log(items);
 	return (
 		<div className="collection-preview">
 			<h1 className="title">{title.toUpperCase()}</h1>
 			<div className="preview">
-				{items.filter((item, idx) =>
-					(item < 4).map((it, i) => <div key={i}>{it.name}</div>)
-				)}
+				{items
+					.filter((item, idx) => idx <= 4) //if idx (number) less than 4
+					.map(({ id, ...otherItemProps }) => {
+						return <CollectionItem key={id} {...otherItemProps} />;
+					})}
 			</div>
 		</div>
 	);

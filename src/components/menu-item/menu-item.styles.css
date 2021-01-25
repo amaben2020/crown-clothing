@@ -41,8 +41,9 @@
 	opacity: 0.7;
 	position: absolute;
 }
-.content :hover {
+.content:hover {
 	cursor: pointer;
+	opacity: 0.7;
 }
 .background-image {
 	transform: scale(1.1);
