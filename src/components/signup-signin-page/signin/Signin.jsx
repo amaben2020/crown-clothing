@@ -1,6 +1,7 @@
-import { Button } from "material-ui-core";
 import React, { Component } from "react";
 import { signInWithGoogle } from "../../../firebase/firebase-utils";
+import CustomButton from "../../custom-button/CustomButton";
+import "./signin.styles.css";
 export class Signin extends Component {
 	state = {
 		email: "",
@@ -17,9 +18,9 @@ export class Signin extends Component {
 	};
 
 	render() {
-		console.log(this.state);
+		//console.log(this.state);
 		return (
-			<div>
+			<div className="sign-in">
 				<form>
 					<input
 						name="email"
@@ -39,7 +40,12 @@ export class Signin extends Component {
 						required
 						placeholder=""
 					/>
-					<Button onClick={signInWithGoogle}>SIGNIN</Button>
+					<div className="buttons">
+						<CustomButton type="submit">SIGN IN</CustomButton>
+						<CustomButton isGoogleSignIn onClick={signInWithGoogle}>
+							SIGN IN WITH GOOGLE
+						</CustomButton>
+					</div>
 				</form>
 			</div>
 		);

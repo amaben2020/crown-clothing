@@ -12,6 +12,7 @@ class App extends Component {
 
 	unsubscribeFromAuth = null;
 
+	//opening the subscription
 	componentDidMount() {
 		this.unsubscribeFromAuth = auth.onAuthStateChanged((user) =>
 			this.setState({ currentUser: user })
@@ -19,6 +20,7 @@ class App extends Component {
 		console.log(this.state);
 	}
 
+	//closing the subscription
 	componentWillUnmount() {
 		this.unsubscribeFromAuth();
 	}
@@ -27,7 +29,7 @@ class App extends Component {
 		return (
 			<div>
 				<BrowserRouter>
-					<Header />
+					<Header currentUser={this.state.currentUser} />
 					<Switch>
 						<Route exact={true} path="/" component={Homepage} />{" "}
 						<Route path="/shop" component={ShopPage} />{" "}
