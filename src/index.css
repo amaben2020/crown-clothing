@@ -3,9 +3,14 @@ body {
 	padding: 20px 60px;
 	box-sizing: border-box;
 	font-family: "Open Sans Condensed";
+	font-weight: 700;
 }
 
 a {
 	text-decoration: none;
 	color: black;
+}
+
+a:hover {
+	color: gray;
 }
