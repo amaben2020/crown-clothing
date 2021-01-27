@@ -11,6 +11,28 @@ const config = {
 	measurementId: "G-FC9JYERCL1",
 };
 
+//Write a function that stores users in your database
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+	if (!userAuth) return;
+	//userRef is the document with the user . its uid
+	const userRef = firestore.doc(`users/${userAuth.uid}`);
+	const snapShot = await userRef.get();
+	console.log(snapShot);
+	//check if snapshot exists and create a user using the documentRef CRUD
+	if (!snapShot.exists) {
+		//if user doesnt exist
+		const { displayName, email } = userAuth;
+		const createdAt = new Date();
+		try {
+			//set is a firebase property used to create a new user
+			await userRef.set({ displayName, email, createdAt, ...additionalData });
+		} catch (error) {
+			console.log("There was an error creating user", error);
+		}
+	}
+	return userRef;
+};
+
 //passing the configuration of your project to firebase
 firebase.initializeApp(config);
 
