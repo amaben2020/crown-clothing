@@ -8,15 +8,14 @@ import {
 	auth,
 	createUserProfileDocument,
 } from "../../src/firebase/firebase-utils.js";
+import { connect } from "react-redux";
+import { setCurrentUser } from "../redux/user/user-actions/user.actions";
 class App extends Component {
-	state = {
-		currentUser: null,
-	};
-
 	unsubscribeFromAuth = null;
 
 	//opening the subscription
 	componentDidMount() {
+		const { setCurrentUser } = this.props;
 		this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
 			//if there is a userAuth object
 			if (userAuth) {
@@ -25,15 +24,13 @@ class App extends Component {
 				userRef.onSnapshot((snapShot) => {
 					console.log(snapShot.data());
 					//snapShot.data() these are the displayName, createdAt and email created in the firebase.utils
-					this.setState({
-						currentUser: {
-							id: snapShot.id,
-							...snapShot.data(),
-						},
+					setCurrentUser({
+						id: snapShot.id,
+						...snapShot.data(),
 					});
 				});
 			}
-			this.setState({ currentUser: userAuth });
+			setCurrentUser(userAuth);
 		});
 	}
 
@@ -46,7 +43,7 @@ class App extends Component {
 		return (
 			<div>
 				<BrowserRouter>
-					<Header currentUser={this.state.currentUser} />
+					<Header />
 					<Switch>
 						<Route exact={true} path="/" component={Homepage} />{" "}
 						<Route path="/shop" component={ShopPage} />{" "}
@@ -57,5 +54,8 @@ class App extends Component {
 		);
 	}
 }
+const mapDispatchToProps = (dispatch) => ({
+	setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);
