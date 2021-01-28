@@ -4,7 +4,9 @@ import Logo from "../../assets/Logo.svg";
 import { connect } from "react-redux";
 import "./header.styles.css";
 import { auth } from "../../firebase/firebase-utils.js";
-const Header = ({ currentUser }) => {
+import CartIcon from "../cart-icon/CartIcon";
+import CartDropdown from "../cart-dropdown/CartDropdown";
+const Header = ({ currentUser, hidden }) => {
 	return (
 		<div className="header">
 			<Link className="logo-container" to="/">
@@ -24,20 +26,24 @@ const Header = ({ currentUser }) => {
 							auth.signOut();
 						}}
 					>
-						SIGN OUT
+						SIGN UP
 					</div>
 				) : (
 					<Link className="option" to="/signin">
-						SIGN UP
+						SIGN OUT
 					</Link>
 				)}
+				<CartIcon />
 			</div>
+			{hidden ? null : <CartDropdown />}
 		</div>
 	);
 };
 
-const mapStateToProps = (state) => {
-	currentUser: state.user.currentUser;
-};
+//Destructuring the user and cart toggle from the root reducer; always wrap in ({})
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+	currentUser,
+	hidden,
+});
 
 export default connect(mapStateToProps)(Header);
