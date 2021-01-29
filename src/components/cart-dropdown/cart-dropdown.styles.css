@@ -21,3 +21,8 @@
 button {
 	margin-top: auto;
 }
+
+.empty-cart {
+	font-size: 20px;
+	margin: 50px auto;
+}

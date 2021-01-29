@@ -10,6 +10,9 @@ import {
 } from "../../src/firebase/firebase-utils.js";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../redux/user/user-actions/user.actions";
+import { selectUser } from "../redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
+import Checkout from "../components/pages/shop/checkout/Checkout";
 class App extends Component {
 	unsubscribeFromAuth = null;
 	//opening the subscription
@@ -46,6 +49,7 @@ class App extends Component {
 					<Switch>
 						<Route exact={true} path="/" component={Homepage} />{" "}
 						<Route path="/shop" component={ShopPage} />{" "}
+						<Route path="/checkout" exact component={Checkout} />{" "}
 						<Route
 							path="/signin"
 							exact
@@ -65,8 +69,8 @@ class App extends Component {
 }
 
 //gETTING/Extracting the state(root-reducer) THE USER STATE FROM THE ROOT REDUCER
-const mapStateToProps = ({ user }) => ({
-	currentUser: user.currentUser,
+const mapStateToProps = createStructuredSelector({
+	currentUser: selectUser,
 });
 
 //Setting the state using the root-reducer(user)

@@ -6,6 +6,9 @@ import "./header.styles.css";
 import { auth } from "../../firebase/firebase-utils.js";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
+import { selectUser } from "../../redux/user/user.selector";
+import { hiddenSelector } from "../../redux/cart/cart-selectors/cart.selectors";
+import { createStructuredSelector } from "reselect";
 const Header = ({ currentUser, hidden }) => {
 	return (
 		<div className="header">
@@ -41,9 +44,9 @@ const Header = ({ currentUser, hidden }) => {
 };
 
 //Destructuring the user and cart toggle from the root reducer; always wrap in ({})
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-	currentUser,
-	hidden,
+const mapStateToProps = createStructuredSelector({
+	currentUser: selectUser,
+	hidden: hiddenSelector,
 });
 
 export default connect(mapStateToProps)(Header);
