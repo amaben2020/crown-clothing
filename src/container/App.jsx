@@ -69,6 +69,7 @@ const mapStateToProps = ({ user }) => ({
 	currentUser: user.currentUser,
 });
 
+//Setting the state using the root-reducer(user)
 const mapDispatchToProps = (dispatch) => ({
 	setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });

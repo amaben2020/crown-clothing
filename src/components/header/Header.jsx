@@ -26,16 +26,16 @@ const Header = ({ currentUser, hidden }) => {
 							auth.signOut();
 						}}
 					>
-						SIGN UP
+						SIGN OUT
 					</div>
 				) : (
 					<Link className="option" to="/signin">
-						SIGN OUT
+						SIGN UP
 					</Link>
 				)}
 				<CartIcon />
 			</div>
-			{hidden ? null : <CartDropdown />}
+			{hidden ? <CartDropdown /> : null}
 		</div>
 	);
 };

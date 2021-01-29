@@ -100,7 +100,9 @@ export class Signup extends Component {
 					</div>
 
 					<div className="buttons">
-						<CustomButton type="submit">SIGN UP</CustomButton>
+						<button className="signup" type="submit">
+							SIGN UP
+						</button>
 					</div>
 				</form>
 			</div>

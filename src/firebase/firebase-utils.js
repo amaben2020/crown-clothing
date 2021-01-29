@@ -14,7 +14,7 @@ const config = {
 //Write a function that stores users in your database
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if (!userAuth) return;
-	//userRef is the document with the user . its uid
+	//userRef is the document with the user; its uid
 	const userRef = firestore.doc(`users/${userAuth.uid}`);
 	const snapShot = await userRef.get();
 	console.log(snapShot);
