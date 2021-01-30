@@ -16,7 +16,7 @@ const Header = ({ currentUser, hidden }) => {
 				<img className="logo" src={Logo} alt="logo.svg" />
 			</Link>
 			<div className="options">
-				<Link className="option" to="/">
+				<Link className="option" to="/shop">
 					SHOP
 				</Link>
 				<Link className="option" to="/">
