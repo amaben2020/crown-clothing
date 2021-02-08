@@ -8,6 +8,7 @@ const StripeButton = ({ price }) => {
 		alert("Payment successful");
 	};
 	const priceForStripe = price * 100;
+
 	return (
 		<StripeCheckout
 			label="Pay Now"

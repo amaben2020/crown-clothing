@@ -1,12 +1,13 @@
 import React from "react";
-import "./homepage.styles.css";
+import { HomePageContainer } from "./pages/Homepage.styles";
 import Directory from "./directory/Directory";
+
 const Homepage = (props) => {
 	// console.log(props.match.params.noteID);
 	return (
-		<div className="homepage">
+		<HomePageContainer>
 			<Directory />
-		</div>
+		</HomePageContainer>
 	);
 };
 
