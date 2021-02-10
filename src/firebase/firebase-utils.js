@@ -33,6 +33,13 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 	return userRef;
 };
 
+//Creating a shop data collection and documents in firestore
+// collectionKey = collection i.e users
+export const addCollectionAndDocuments = (collectionKey, objectsToAdd) => {
+	const collectionReference = firestore.collection(collectionKey);
+	console.log(collectionReference);
+};
+
 //passing the configuration of your project to firebase
 firebase.initializeApp(config);
 

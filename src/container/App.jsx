@@ -13,11 +13,13 @@ import { setCurrentUser } from "../redux/user/user-actions/user.actions";
 import { selectUser } from "../redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
 import Checkout from "../components/pages/shop/checkout/Checkout";
+import { selectCollectionsForPreview } from "./../redux/shop/shop.selectors";
+import { addCollectionAndDocuments } from "./../firebase/firebase-utils.js";
 class App extends Component {
 	unsubscribeFromAuth = null;
 	//opening the subscription
 	componentDidMount() {
-		const { setCurrentUser } = this.props;
+		const { setCurrentUser, collectionsArray } = this.props;
 		this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
 			//if there is a userAuth object
 			if (userAuth) {
@@ -33,6 +35,7 @@ class App extends Component {
 				});
 			}
 			setCurrentUser(userAuth);
+			addCollectionAndDocuments("collections", collectionsArray);
 		});
 	}
 
@@ -71,6 +74,7 @@ class App extends Component {
 //gETTING/Extracting the state(root-reducer) THE USER STATE FROM THE ROOT REDUCER
 const mapStateToProps = createStructuredSelector({
 	currentUser: selectUser,
+	collectionsArray: selectCollectionsForPreview,
 });
 
 //Setting the state using the root-reducer(user)
